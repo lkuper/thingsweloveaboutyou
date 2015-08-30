@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Things we love about you</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="intro">Alex, a thing I love about you is...</div>
+    <div id="thing"></div>
+    <script>
+      $.get("things.txt", function(data) {
+
+        var things = data.split('\n');
+        things.pop(); // last element is an empty string
+        var index = Math.floor(Math.random() * things.length);
+        var thing = things[index];
+        document.getElementById("thing").innerHTML = '<p>' + thing + '</p>';
+
+      });
+
+    </script>
+  </body>
+</html>

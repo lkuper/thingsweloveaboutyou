@@ -39,10 +39,10 @@ function cleanup(string, name) {
         string = string.replace(matches[1], "");
     }
 
+    // FIXME: I don't think these are actually working
     // remove stray parens
     string = string.replace('(','');
     string = string.replace(')','');
-
     // replace double periods with single ones
     string = string.replace('..','.');
 

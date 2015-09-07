@@ -28,24 +28,23 @@ function myInsert(table, index, value) {
 
 function cleanup(string, name) {
 
-    // remove everything after the last period
-    var re = /\.([^.]+)$/;
-    var matches = re.exec(string);
+    // remove everything after the last period or exclamation point
+    var re = /([\.!])([^.!]+)$/;
+    string = string.replace(re, '$1');
 
-    if (matches === null) {
-        // no periods in string
-        console.log(string);
+    // if string has no ending punctuation, add a period
+    var lastChar = string.slice(-1);
+    if (lastChar !== "." && lastChar !== "!") {
         string = string + ".";
-    } else {
-        string = string.replace(matches[1], "");
     }
 
-    // FIXME: I don't think these are actually working
-    // remove stray parens
-    string = string.replace('(','');
-    string = string.replace(')','');
-    // replace double periods with single ones
-    string = string.replace('..','.');
+    string = string.replace(/\(/g,'');
+    string = string.replace(/\)/g,'');
+    string = string.replace(/"/g,'');
+
+    // fix double ending punctuation
+    string = string.replace(',.', '.');
+    string = string.replace(/\.\./g, '.');
 
     return string + " " + name;
 }

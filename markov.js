@@ -2,6 +2,7 @@ function markov(things) {
 
     var allwords = [];
     var allnames = [];
+
     for (var i = 0; i < things.length; i++) {
         // Remove the name at the end of the thing
         var re = /(\([^)]+\))$/;
@@ -12,7 +13,7 @@ function markov(things) {
         words.pop(); // last element is an empty string
         allwords = allwords.concat(words);
     }
-    
+
     return makeMarkovText(allwords, allnames);
 }
 
@@ -31,7 +32,7 @@ function cleanup(string, name) {
     var re = /\.([^.]+)$/;
     var matches = re.exec(string);
 
-    if (matches == null) {
+    if (matches === null) {
         // no periods in string
         console.log(string);
         string = string + ".";
@@ -51,8 +52,8 @@ function cleanup(string, name) {
 
 function makeMarkovText(words, names) {
 
-    var MAXLENGTH = 20
-    var NOWORD = "NOWORD"
+    var MAXLENGTH = 20;
+    var NOWORD = "NOWORD";
 
     // pick a name
     var index = Math.floor(Math.random() * names.length);
@@ -68,8 +69,8 @@ function makeMarkovText(words, names) {
     myInsert(table, w, NOWORD);
 
     // generate text
-    outputString = "";
-    w = NOWORD
+    var outputString = "";
+    w = NOWORD;
 
     for (var i = 0; i < MAXLENGTH; i++) {
         var list = table[w];
